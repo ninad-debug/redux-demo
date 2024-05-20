@@ -1,11 +1,10 @@
 import './App.css';
-import UserCard from './components/UserCard';
+import HomePage from './pages/HomePage';
 
 function App() {
   return (
     <div className="App">
-      <h1>Hello world</h1>
-      <UserCard />
+      <HomePage />
     </div>
   );
 }

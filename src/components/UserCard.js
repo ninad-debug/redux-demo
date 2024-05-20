@@ -1,36 +1,43 @@
 import * as React from 'react';
-import Box from '@mui/material/Box';
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
+import { deleteUser } from '../redux/userSlice';
+import { useDispatch } from 'react-redux';
 
-export default function UserCard() {
+export default function UserCard({userId, user}) {
+
+  const dispatch = useDispatch()
+
+  const handleDeleteUser = (id) => {
+    dispatch(deleteUser(id))
+  }
+
+  console.log('user', user)
   return (
-    <Card sx={{ width: 265 }}>
+    <Card sx={{ width: 265 }} key={userId}>
       <CardContent>
         <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
-          Ninad Dayanand Samant
+          {user?.fullName}
         </Typography>
         <Typography variant="h5" component="div">
-          react@gmail.com
-        </Typography>
+        {user?.email}
+        </Typography>  
         <br />
         <Typography sx={{ mb: 1.5 }} color="text.secondary">
-          D.O.B - 09/01/2000
+          D.O.B - {user?.dob}
         </Typography>
         <Typography variant="body2">
-          summary
+          {user?.summary}
           <br />
-          <Button size="small">View</Button>
         </Typography>
       </CardContent>
       <CardActions>
-        <Button size="small">Add</Button>
         <Button size="small">Update</Button>
-        <Button size="small">Delete</Button>
       </CardActions>
+        <Button size="small" onClick={() => handleDeleteUser(userId)}>Delete</Button>
     </Card>
   );
 }
